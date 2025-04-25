@@ -1,18 +1,16 @@
-//
-//  eAbsensiTTApp.swift
-//  eAbsensiTT
-//
-//  Created by Diskominfo Tebing Tinggi on 04/02/25.
-//
-
 import SwiftUI
 import SwiftData
+import GoogleMaps
 
 @main
-struct eAbsensiTTApp: App {
+struct MyApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State private var isLoggedIn: Bool? = nil  // State untuk status login
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            User.self,
+            KoordinatEntity.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,8 +23,45 @@ struct eAbsensiTTApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if let isLoggedIn = isLoggedIn {
+                if isLoggedIn {
+                    DashboardView()
+                        .modelContainer(sharedModelContainer)
+                } else {
+                    ContentView()
+                        .modelContainer(sharedModelContainer)
+                }
+            } else {
+                ProgressView() // Menampilkan indikator loading sementara
+                    .onAppear {
+                        Task {
+                            await checkUserData()
+                        }
+                    }
+            }
         }
-        .modelContainer(sharedModelContainer)
+    }
+
+    // Fungsi untuk mengecek apakah tabel User memiliki data
+    private func checkUserData() async {
+        do {
+            let users: [User] = try sharedModelContainer.mainContext.fetch(FetchDescriptor<User>())
+            DispatchQueue.main.async {
+                self.isLoggedIn = !users.isEmpty
+            }
+        } catch {
+            print("Gagal mengambil data pengguna: \(error)")
+            DispatchQueue.main.async {
+                self.isLoggedIn = false
+            }
+        }
+    }
+}
+
+// Inisialisasi AppDelegate
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        GMSServices.provideAPIKey("AIzaSyD94o7gB9VMJUj8zEETXdvJy9CnlkRF1-8")
+        return true
     }
 }

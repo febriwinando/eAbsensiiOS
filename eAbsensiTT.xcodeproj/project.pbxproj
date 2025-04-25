@@ -6,13 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		195A58852D530DF80008D248 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 195A58842D530DF80008D248 /* GoogleMaps */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		19508E482D51D374008EFD6E /* eAbsensiTT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eAbsensiTT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		195A58952D5319B10008D248 /* Exceptions for "eAbsensiTT" folder in "eAbsensiTT" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 19508E472D51D374008EFD6E /* eAbsensiTT */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		19508E4A2D51D374008EFD6E /* eAbsensiTT */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				195A58952D5319B10008D248 /* Exceptions for "eAbsensiTT" folder in "eAbsensiTT" target */,
+			);
 			path = eAbsensiTT;
 			sourceTree = "<group>";
 		};
@@ -23,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				195A58852D530DF80008D248 /* GoogleMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +83,7 @@
 			);
 			name = eAbsensiTT;
 			packageProductDependencies = (
+				195A58842D530DF80008D248 /* GoogleMaps */,
 			);
 			productName = eAbsensiTT;
 			productReference = 19508E482D51D374008EFD6E /* eAbsensiTT.app */;
@@ -94,6 +113,9 @@
 			);
 			mainGroup = 19508E3F2D51D374008EFD6E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				195A58832D530DF80008D248 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 19508E492D51D374008EFD6E /* Products */;
 			projectDirPath = "";
@@ -252,8 +274,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eAbsensiTT/Preview Content\"";
+				DEVELOPMENT_TEAM = T2N8W87LVL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = eAbsensiTT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "e-Absensi";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -280,8 +305,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eAbsensiTT/Preview Content\"";
+				DEVELOPMENT_TEAM = T2N8W87LVL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = eAbsensiTT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "e-Absensi";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -322,6 +350,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		195A58832D530DF80008D248 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		195A58842D530DF80008D248 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 195A58832D530DF80008D248 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 19508E402D51D374008EFD6E /* Project object */;
 }
