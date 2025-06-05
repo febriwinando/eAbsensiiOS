@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var alertMessage = ""
 
     var body: some View {
+        
         NavigationView {
             VStack(spacing: 10) {
                 

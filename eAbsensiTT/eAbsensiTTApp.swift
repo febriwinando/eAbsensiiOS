@@ -61,7 +61,7 @@ struct MyApp: App {
 // Inisialisasi AppDelegate
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GMSServices.provideAPIKey("AIzaSyD94o7gB9VMJUj8zEETXdvJy9CnlkRF1-8")
+        GMSServices.provideAPIKey("AIzaSyD9472DJ2F3NDSgB9VMJUj8zEETXdvJy9CnlkRF1-8")
         return true
     }
 }

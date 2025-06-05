@@ -18,6 +18,7 @@ struct DashboardView: View {
     
     var body: some View {
         NavigationStack {
+            
             ZStack {
                 VStack {
                     GeometryReader { geometry in
@@ -246,7 +247,7 @@ struct DashboardView: View {
                                     }
                                     
                                     Button(
-                                        action: deleteAllData
+                                        action: shareDatabase
                                     ) {
                                         HStack {
                                             Text("Singkronkan Kegiatan")
@@ -424,6 +425,14 @@ struct DashboardView: View {
         }
     }
     
+    func shareDatabase() {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let dbURL = urls[0].appendingPathComponent("MyCustomDB.sqlite") // atau nama file kamu
+
+        let activityVC = UIActivityViewController(activityItems: [dbURL], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+    }
+
     
     func getFormattedDate() -> String {
         

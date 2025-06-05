@@ -10,49 +10,43 @@ struct AbsenPegawai: View {
     @StateObject private var locationManager = LocationManager() // Menggunakan StateObject untuk locationManager
 
     var body: some View {
-        VStack(spacing: 16) { // gunakan spacing agar lebih rapi
-            // Google Map
+        VStack {
+            // Menampilkan Google Maps View
             GoogleMapView(locationManager: locationManager)
-//                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
-                .clipShape(BottomRoundedCorners(radius: 40))
+                .clipShape(BottomRoundedCorners(radius: 50))
                 .edgesIgnoringSafeArea(.top)
-
-            // Jarak
-            Text("Jarak ke tujuan: \(locationManager.distanceToDestination, specifier: "%.2f") meter")
-                .padding()
-                .background(Color.white.opacity(0.8))
-                .cornerRadius(10)
-                .padding(.horizontal)
-
-            // Gambar yang ditangkap
+            
+                Text("Jarak ke tujuan: \(locationManager.distanceToDestination, specifier: "%.2f") meter")
+                    .padding()
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(10)
+            
+            
             displayCapturedImage()
-
-            // Tombol Kamera
+            
             Button(action: {
                 withAnimation {
-                    isCameraPresented.toggle()
+//                    isCameraPresented.toggle()
                 }
             }) {
-                Text("Buka Kamera")
+                Text("Absen")
                     .font(.title)
-                    .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-                    .padding(.horizontal, 20)
+                    .padding([.leading, .trailing], 10)
             }
 
-            Spacer(minLength: 20) // Spacer kecil jika ingin ada sedikit jarak bawah
+            
         }
         .onAppear {
-            locationManager.startUpdatingLocation()
+            locationManager.startUpdatingLocation() // Memulai pembaruan lokasi saat tampilan muncul
         }
         .onDisappear {
-            locationManager.stopUpdatingLocation()
+            locationManager.stopUpdatingLocation() // Menghentikan pembaruan lokasi saat tampilan menghilang
         }
     }
-
     
     
     @ViewBuilder
@@ -68,18 +62,24 @@ struct AbsenPegawai: View {
                     .shadow(radius: 5)
             }
         } else {
-            VStack {
-                Image(systemName: "camera.viewfinder")
+            Button(action: {
+                withAnimation {
+                    isCameraPresented.toggle()
+                }
+            }) {
+                Image("camera")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.gray)
-
-                Text("Ambil Foto")
-                    .font(.largeTitle)
+                    .frame(width: 150, height: 150)
                     .foregroundColor(.gray)
             }
-            .padding()
+            .fullScreenCover(isPresented: $isCameraPresented) {
+                CameraView(capturedImage: $capturedImage) {
+                    // This closure will be called when the image is captured
+                    isCameraPresented = false
+              }
+                .edgesIgnoringSafeArea(.all)
+            }
         }
     }
 }
